@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block head %}
+
+{% endblock %}
+{% block title %}设备资料{% endblock %}
+
+
+{% block navbar %}
+<section class="content-header">
+    <h1>设备资料</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> {{ksname}}</a></li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> 设备</a></li>
+        <li class="active">设备资料</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+<div class="box box-primary">
+<form method="post" enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+     <div class="box-header with-border">
+        {% include 'message.html' %}
+     </div>
+
+        <div class="box-body">
+            <div class="col-md-2">
+                <label>设备编号</label>
+            </div>
+            <div class="col-md-2">
+                <label>{{centent.eqid}}</label> 
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-2">
+                <label>设备名</label> 
+            </div>
+            <div class="col-md-2">
+                <label>{{centent.eqname}}</label> 
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>{{form.eqprdata.label}}</label>
+                    {{form.eqprdata(class_="input-append date form_datetime", value=centent.eqprdata)}}
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>{{form.equsedata.label}}</label>
+                    {{form.equsedata(class_="input-append date form_datetime", value=centent.equsedata)}}    
+                </div>
+            </div>
+        </div>
+            
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>{{form.eqce1.label}}</label>
+                    {{form.eqce1(class_="inputfile",placeholder="请输入")}}
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>{{form.eqce2.label}}</label>
+                    {{form.eqce2(class_="inputfile",placeholder="请输入")}}
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>{{form.eqce3.label}}</label>
+                    {{form.eqce3(class_="inputfile",placeholder="请输入")}}
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>{{form.eqce4.label}}</label>
+                    {{form.eqce4(class_="inputfile",placeholder="请输入")}}
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>{{form.eqce5.label}}</label>
+                    {{form.eqce5(class_="inputfile",placeholder="请输入")}}
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="col-md-6">
+                {{form.submit(class_="btn btn-primary pull-right")}}
+            </div>
+        </div>
+</form>
+
+</div>
+<div class="col-md-4" style="margin-bottom: 20px;">
+    <label><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}">返回</a></label>      
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+    $(".form_datetime").datetimepicker({
+        format:'yyyy-mm-dd',
+        todayBtn:true,
+        pickerPosition: "bottom-left",
+        autoclose: true,
+        minView: "month",
+    });
+
+</script>  
+{% endblock %}

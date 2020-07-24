@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}设备维修资料{% endblock %}
+
+
+{% block navbar %}
+<section class="content-header">
+    <h1>维修资料</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> {{ksname}}</a></li>
+        <li class="active">维修资料</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+    <div class="box-header with-border">
+            {% include 'message.html' %}
+    </div>
+<div class="box-body">
+        {% if forms%}
+        <table class="table table-bordered">
+            <tr>
+                
+                <th>维修记录编号</th>
+                <th>联系方式</th>
+                <th>维修维保项目日期</th>
+                <th>维修维保项目人员</th>
+                <th>更换配件及价格记录</th>
+                <th>更新记录</th>
+            </tr>
+            
+            {% for row in forms %}
+            <tr>
+            <form method="post" >
+                {{ form.oldmaid(value=row.maid, style="display:none;" )}}
+                <td>{{form.maid(class_="form-control",value=row.maid)}}</td>
+                <td>{{form.lxfs(class_="form-control",value=row.lxfs)}}</td>
+                <td>{{form.wxdata(class_="input-append date form_datetime",value=row.wxdata)}}</td>
+                <td>{{form.ren(class_="form-control",value=row.ren)}}</td>
+                <td>{{form.pj(class_="form-control",value=row.pj)}}</td>
+                <td>{{form.submit(class_="btn btn-primary pull-right")}}</td>
+            </form>
+            </tr>
+            {% endfor %}
+            
+        </table>
+        {{ pagination.links }}
+        {% endif %}
+    </div>
+
+<div class="col-md-4">
+    <label><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}">返回</a></label>      
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+    $(".form_datetime").datetimepicker({
+        format:'yyyy-mm-dd',
+        todayBtn:true,
+        pickerPosition: "bottom-left",
+        autoclose: true,
+        minView: "month",
+    });
+
+</script>  
+{% endblock %}

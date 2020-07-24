@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}设备维修资料{% endblock %}
+
+
+{% block navbar %}
+<section class="content-header">
+    <h1>维修资料</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> {{ksname}}</a></li>
+        <li class="active">维修资料</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+<div class="box box-primary" >
+    <form method="post"  enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+        <div class="box-header with-border">
+            {% include 'message.html' %}
+        </div>
+    <div class="col-md-8" style="margin-bottom: 20px;margin-top:20px;">
+        <div class="col-md-4 " >
+            <label>设备编号</label>      
+        </div>
+        <div class="col-md-4">
+            <label>{{eqid}}</label>      
+        </div>
+    </div>
+
+    <div class="col-md-8" style="margin-bottom: 20px;">
+        <div class="col-md-4">
+            <label>设备名</label>      
+        </div>
+        <div class="col-md-4">
+            <label>{{eqname}}</label>      
+        </div>
+    </div>
+    
+        <div class="box-body">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{form.maid.label}}</label>
+                    {{form.maid(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{form.lxfs.label}}</label>
+                    {{form.lxfs(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{form.wxdata.label}}</label>
+                    {{form.wxdata(class_="input-append date form_datetime", placeholder="请输入")}}
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{form.ren.label}}</label>
+                    {{form.ren(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{form.pj.label}}</label>
+                    {{form.pj(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <div class="col-md-6">
+                {{form.submit(class_="btn btn-primary pull-right")}}
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<div class="box-body">
+        {% if forms%}
+        <table class="table table-bordered">
+            <tr>
+                
+                <th>维修记录编号</th>
+                <th>联系方式</th>
+                <th>维修维保项目日期</th>
+                <th>维修维保项目人员</th>
+                <th>更换配件及价格记录</th>
+                <th>删除记录</th>
+            </tr>
+            {% for row in forms %}
+            <tr>
+                <td>{{row.maid}}</td>
+                <td>{{row.lxfs}}</td>
+                <td>{{row.wxdata}}</td>
+                <td>{{row.ren}}</td>
+                <td>{{row.pj}}</td>
+                <td><a class='glyphicon glyphicon-remove'
+                       href='{{ url_for("eqde.maininfode", maid = row.maid,eqid=eqid,ksid=ksid) }}'></a></td>
+                
+            </tr>
+         {% endfor %}
+        </table>
+        {{ pagination.links }}
+        {% endif %}
+    </div>
+
+<div class="col-md-4">
+    <label><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}">返回</a></label>      
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+    $(".form_datetime").datetimepicker({
+        format:'yyyy-mm-dd',
+        todayBtn:true,
+        pickerPosition: "bottom-left",
+        autoclose: true,
+        minView: "month",
+    });
+
+</script>  
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}设备{% endblock %}
+
+
+{% block navbar %}
+<section class="content-header">
+    <h1>设备</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> {{ksname}}</a></li>
+        <li class="active">设备</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+<div class="box box-primary">
+    <form method="post" >
+        {{form.hidden_tag()}}
+        <div class="box-header with-border">
+            {% include 'message.html' %}
+        </div>
+
+        <div class="box-body">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{form.eqid.label}}</label>
+                    {{form.eqid(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{form.eqname.label}}</label>
+                    {{form.eqname(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="box-footer">
+            <div class="col-md-6">
+               
+                {{form.submit(class_="btn btn-primary pull-right")}}
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="box-body">
+        {% if forms%}
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <th>设备编号</th>
+                <th>设备名称</th>
+                <th>设备到期日期</th>
+                <th>设备资料</th>
+                <th>检验资料</th>
+                <th>维修资料</th>
+                <th>删除设备</th>
+            </tr>
+            {% for row in forms %}
+            <tr>
+                <td>{{row.id}}</td>
+                <td>{{row.eqid}}</td>
+                <td>{{row.eqname}}</td>
+                <td>{{row.eqmt}}</td>
+                <td><a class='fa fa-lg fa-edit text-light-blue'
+                       href='{{ url_for("eqname.eqinfo", eqid=row.eqid,ksid=ksid) }}'></a></td>
+                <td><a class='fa fa-lg fa-edit text-light-blue'
+                       href='{{ url_for("eqname.ininfo", eqid=row.eqid,ksid=ksid) }}'></a></td>
+                <td><a class='fa fa-lg fa-edit text-light-blue'
+                       href='{{ url_for("eqname.maininfo", eqid=row.eqid,ksid=ksid) }}'></a></td>
+                <td><a class='glyphicon glyphicon-remove'
+                       href='{{ url_for("eqde.eqnamede", eqid=row.eqid,ksid=ksid) }}'></a></td>
+            </tr>
+         {% endfor %}
+        </table>
+        {{ pagination.links }}
+        {% endif %}
+    </div>
+{% endblock %}
+

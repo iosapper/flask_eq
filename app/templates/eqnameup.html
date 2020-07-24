@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}设备{% endblock %}
+
+
+{% block navbar %}
+<section class="content-header">
+    <h1>设备</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> {{ksname}}</a></li>
+        <li class="active">设备</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+<div class="box-body">
+
+    <div class="box-header with-border">
+        {% include 'message.html' %}
+    </div>
+        {% if forms %}
+        <table class="table table-bordered">
+            <tr>
+                <th>设备编号</th>
+                <th>设备名称</th>
+                <th>设备资料</th>
+                <th>检验资料</th>
+                <th>维修资料</th>
+                <th>更新设备</th>
+            </tr>
+            <tr>
+            {% for row in forms %}
+            <form method="post" >
+                {{ form.oldeqid(value=row.eqid, style="display:none;" )}}
+                <td>{{form.eqid(class_="form-control",value=row.eqid)}}</td>
+                <td>{{form.eqname(class_="form-control",value=row.eqname)}}</td>
+                <td><a class='fa fa-lg fa-edit text-light-blue'
+                       href='{{ url_for("equp.eqinfoup", eqid=row.eqid,ksid=ksid) }}'></a></td>
+                <td><a class='fa fa-lg fa-edit text-light-blue'
+                       href='{{ url_for("equp.eqinup", eqid=row.eqid,ksid=ksid) }}'></a></td>
+                <td><a class='fa fa-lg fa-edit text-light-blue'
+                       href='{{ url_for("equp.eqmainup", eqid=row.eqid,ksid=ksid) }}'></a></td>
+                <td>{{form.submit(class_="btn btn-primary pull-content")}}</td>
+            </form>
+            {% endfor %}
+            </tr>
+        </table>
+    {% endif %}
+    </div>
+{% endblock %}
+

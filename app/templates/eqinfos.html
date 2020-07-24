@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}设备{% endblock %}
+
+
+{% block navbar %}
+<section class="content-header">
+    <h1>设备资料</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> {{ksname}}</a></li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> 设备</a></li>
+        <li class="active">设备资料</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+    <div class="box-body">
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label>设备编号</label>      
+            </div>
+            <div class="col-md-4">
+                <label>{{centent.eqid}}</label>      
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label>设备名</label>      
+            </div>
+            <div class="col-md-4">
+                <label>{{centent.eqname}}</label>      
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label>设备生产日期</label>      
+            </div>
+            <div class="col-md-4">
+                <label>{{centent.eqprdata}}</label>      
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label>设备投用日期</label>      
+            </div>
+            <div class="col-md-4">
+                <label>{{centent.equsedata}}</label>      
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label>税务登记证</label>      
+            </div>
+            <div class="col-md-4">
+                <label><a href="{{ url_for('eqname.img',ksid = ksid ,eqid = centent.eqid,eqname=centent.eqname,file_url = centent.eqce1file_url,byto = "eqinfo" ) }}" class="btn btn-default btn-flat">查看</a></label>      
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label>营业执照</label>      
+            </div>
+            <div class="col-md-4">
+                <label><a href="{{ url_for('eqname.img',ksid = ksid ,eqid = centent.eqid,eqname=centent.eqname,file_url = centent.eqce1file_url,byto = "eqinfo" ) }}" class="btn btn-default btn-flat">查看</a></label> 
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label>组织机构代码证</label>      
+            </div>
+            <div class="col-md-4">
+                <label><a href="{{ url_for('eqname.img',ksid = ksid ,eqid = centent.eqid,eqname=centent.eqname,file_url = centent.eqce1file_url,byto = "eqinfo" ) }}" class="btn btn-default btn-flat">查看</a></label> 
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label>经销商证件</label>      
+            </div>
+            <div class="col-md-4">
+                <label><a href="{{ url_for('eqname.img',ksid = ksid ,eqid = centent.eqid,eqname=centent.eqname,file_url = centent.eqce1file_url,byto = "eqinfo" ) }}" class="btn btn-default btn-flat">查看</a></label> 
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label>设备说明书</label>      
+            </div>
+            <div class="col-md-4">
+                <label><a href="{{ url_for('eqname.img',ksid = ksid ,eqid = centent.eqid,eqname=centent.eqname,file_url = centent.eqce1file_url,byto = "eqinfo" ) }}" class="btn btn-default btn-flat">查看</a></label> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4" style="margin-bottom: 20px;">
+        <label><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}">返回</a></label>      
+    </div>
+{% endblock %}
+

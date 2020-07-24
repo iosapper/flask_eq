@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}设备{% endblock %}
+
+
+{% block navbar %}
+<section class="content-header">
+    <h1>设备</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> {{ksname}}</a></li>
+        <li class="active">设备</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+<div class="box-body">
+
+    <div class="box-header with-border">
+        {% include 'message.html' %}
+    </div>
+        {% if forms %}
+        <table class="table table-bordered">
+            <tr>
+                <th>检验项目编号</th>
+                <th>设备说明书</th>
+                <th>更新检验项目</th>
+            </tr>
+            
+            {% for row in forms %}
+            <tr>
+            <form method="post" enctype="multipart/form-data">
+                {{ form.oldprid(value=row.prid, style="display:none;" )}}
+                <td>{{form.prid(class_="form-control",value=row.prid)}}</td>
+                <td>{{form.smj(class_="form-control",value=row.smj)}}</td>
+                <td>{{form.submit(class_="btn btn-primary pull-content")}}</td>
+             </tr>
+            </form>
+            {% endfor %}
+           
+        </table>
+    {% endif %}
+    </div>
+{% endblock %}
+

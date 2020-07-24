@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}设备检验资料{% endblock %}
+
+
+{% block navbar %}
+<section class="content-header">
+    <h1>检验资料</h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> 当前位置</li>
+        <li class="active"><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}"> {{ksname}}</a></li>
+        <li class="active">检验资料</li>
+    </ol>
+</section>
+{% endblock %}
+
+
+{% block content %}
+<div class="box box-primary" >
+    <form method="post"  enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+        <div class="box-header with-border">
+            {% include 'message.html' %}
+        </div>
+    <div class="col-md-8" style="margin-bottom: 20px;margin-top:20px;">
+        <div class="col-md-4 " >
+            <label>设备编号</label>      
+        </div>
+        <div class="col-md-4">
+            <label>{{eqid}}</label>      
+        </div>
+    </div>
+
+    <div class="col-md-8" style="margin-bottom: 20px;">
+        <div class="col-md-4">
+            <label>设备名</label>      
+        </div>
+        <div class="col-md-4">
+            <label>{{eqname}}</label>      
+        </div>
+    </div>
+    
+        <div class="box-body">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{form.prid.label}}</label>
+                    {{form.prid(class_="form-control",placeholder="请输入")}}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>{{form.smj.label}}</label>
+                    {{form.smj(class_="inputfile",placeholder="请输入")}}
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="box-footer">
+            <div class="col-md-6">
+                {{form.submit(class_="btn btn-primary pull-right")}}
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<div class="box-body">
+        {% if forms%}
+        <table class="table table-bordered">
+            <tr>
+                
+                <th>检验资料编号</th>
+                <th>扫描件</th>
+                <th>删除检验资料</th>
+            </tr>
+            {% for row in forms %}
+            <tr>
+                <td>{{row.prid}}</td>
+                <td><label><a href="{{ url_for('eqname.img',ksid = ksid ,eqid = eqid,eqname=eqname,file_url = row.smjfile_url,byto = "ininfo" ) }}" class="btn btn-default btn-flat">查看</a></label> </td>
+                <td><a class='glyphicon glyphicon-remove'
+                       href='{{ url_for("eqde.ininfode", prid = row.prid,eqid=eqid,ksid=ksid) }}'></a></td>
+            </tr>
+         {% endfor %}
+        </table>
+        {{ pagination.links }}
+        {% endif %}
+    </div>
+
+<div class="col-md-4">
+    <label><a href="{{ url_for('eqname.eqnames',ksid=ksid) }}">返回</a></label>      
+</div>
+{% endblock %}
+
